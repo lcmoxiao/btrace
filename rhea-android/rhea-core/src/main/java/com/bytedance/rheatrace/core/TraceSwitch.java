@@ -104,7 +104,7 @@ class TraceSwitch {
     }
 
     static File getRheaTraceDir(Context context) {
-        return new File(context.getFilesDir(), "rhea-trace" + File.separator + context.getPackageName());
+        return new File(context.getExternalCacheDir(), "rhea-trace" + File.separator + context.getPackageName());
     }
 
     private static void enableAppTracing() {
