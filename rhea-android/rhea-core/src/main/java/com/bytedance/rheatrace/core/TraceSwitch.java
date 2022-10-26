@@ -44,7 +44,7 @@ class TraceSwitch {
         if (!isMainProcess) {
             return;
         }
-        traceConfiguration = LocalConfigManager.createRheaConfig(context.getPackageName());
+        traceConfiguration = LocalConfigManager.createRheaConfig(context);
         traceConfiguration.checkConfig();
         RheaTrace.isMainProcess = true;
         RheaTrace.mainThreadOnly = traceConfiguration.mainThreadOnly;

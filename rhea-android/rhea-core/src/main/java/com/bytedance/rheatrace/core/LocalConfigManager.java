@@ -16,6 +16,7 @@
 
 package com.bytedance.rheatrace.core;
 
+import android.content.Context;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
@@ -51,8 +52,8 @@ class LocalConfigManager {
      * create rhea config from local.
      */
     @NonNull
-    static TraceConfiguration createRheaConfig(String packageName) {
-        File rheaConfigDir = new File(Environment.getExternalStorageDirectory(), "rhea-trace" + File.separator + packageName);
+    static TraceConfiguration createRheaConfig(Context context) {
+        File rheaConfigDir = new File(context.getFilesDir(), "rhea-trace" + File.separator + context.getPackageName());
         TraceConfiguration traceConfiguration = LocalConfigManager.readConfigFile(rheaConfigDir);
         if (traceConfiguration == null) {
             traceConfiguration = new TraceConfiguration.Builder()
