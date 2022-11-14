@@ -44,7 +44,7 @@ class TraceSwitch {
         if (!isMainProcess) {
             return;
         }
-        traceConfiguration = LocalConfigManager.createRheaConfig(context.getPackageName());
+        traceConfiguration = LocalConfigManager.createRheaConfig(context);
         traceConfiguration.checkConfig();
         RheaTrace.isMainProcess = true;
         RheaTrace.mainThreadOnly = traceConfiguration.mainThreadOnly;
@@ -65,7 +65,7 @@ class TraceSwitch {
         if (started) {
             Log.d(TAG, "RheaTrace has been started, just ignore!");
         } else {
-            boolean result = RheaATrace.start(context, getRheaTraceDir(context.getPackageName()),
+            boolean result = RheaATrace.start(context, getRheaTraceDir(context),
                     new RheaATrace.Configuration(
                             traceConfiguration.enableIO,
                             traceConfiguration.mainThreadOnly,
@@ -103,8 +103,8 @@ class TraceSwitch {
         return started;
     }
 
-    static File getRheaTraceDir(String packageName) {
-        return new File(Environment.getExternalStorageDirectory(), "rhea-trace" + File.separator + packageName);
+    static File getRheaTraceDir(Context context) {
+        return new File(context.getExternalCacheDir(), "rhea-trace" + File.separator + context.getPackageName());
     }
 
     private static void enableAppTracing() {

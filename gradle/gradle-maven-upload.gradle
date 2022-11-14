@@ -33,7 +33,7 @@ def getSnapshotUrl() {
     if (localUrl != null) {
         return uri(localUrl)
     }
-    return "https://oss.sonatype.org/content/repositories/snapshots/"
+    return "http://mirrors.tencent.com/repository/maven/thirdparty-snapshots/"
 }
 
 afterEvaluate { it ->
@@ -45,9 +45,9 @@ afterEvaluate { it ->
 
                 pom.groupId = POM_GROUP_ID
                 pom.artifactId = POM_ARTIFACT_ID
-                pom.version = POM_VERSION_NAME
+                pom.version = "1.0.3"
 
-                repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                repository(url: "http://mirrors.tencent.com/repository/maven/thirdparty/") {
                     authentication(userName: ossrhUsername, password: ossrhPassword)
                 }
                 snapshotRepository(url: getSnapshotUrl()) {
